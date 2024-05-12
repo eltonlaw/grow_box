@@ -15,6 +15,7 @@ void delay(uint32_t delay) {
 
 int main(void) {
     int x = add(1, 2);
+    /* 16Mhz internal clock, 1ms per systick tick */
     SysTick_Config(16000);
     while (1) {
         delay(1000);

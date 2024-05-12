@@ -1,6 +1,7 @@
-.PHONY: all clean flash libstm32g0
+.PHONY: all clean flash gdb libstm32g0 openocd
 
 CC=arm-none-eabi-gcc
+GDB=arm-none-eabi-gdb
 CFLAGS=-mcpu=cortex-m0plus -mthumb -g -O0
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Device/ST/STM32G0xx/Include
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Include
@@ -29,3 +30,9 @@ clean:
 
 flash: main.bin
 	STM32_Programmer_CLI -c port=SWD -w main.bin 0x8000000 -rst
+
+openocd:
+	openocd -f interface/stlink.cfg -f target/stm32g0x.cfg  -s ./openocd/tcl
+
+gdb: main.elf
+	$(GDB) $<

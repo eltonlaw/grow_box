@@ -1,3 +1,6 @@
 [submodule "STM32CubeG0"]
 	path = STM32CubeG0
 	url = git@github.com:STMicroelectronics/STM32CubeG0.git
+[submodule "openocd"]
+	path = openocd
+	url = git@github.com:openocd-org/openocd.git
