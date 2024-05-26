@@ -1,5 +1,6 @@
 #define STM32G070xx
 #include "stm32g0xx.h"
+#include "gpio.h"
 
 volatile uint32_t uw_tick = 0;
 
@@ -13,6 +14,7 @@ void delay(uint32_t delay) {
 }
 
 int main(void) {
+    int x = add(1, 2);
     SysTick_Config(16000);
     while (1) {
         delay(1000);

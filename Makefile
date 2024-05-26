@@ -1,9 +1,13 @@
+.PHONY: all clean flash libstm32g0
+
 CC=arm-none-eabi-gcc
 CFLAGS=-mcpu=cortex-m0plus -mthumb -g -O0
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Device/ST/STM32G0xx/Include
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Include
+CFLAGS+=-I./libstm32g0/include
 CFLAGS+=-I./src
 LDFLAGS=-Tlinker_script.ld -nostartfiles
+LDFLAGS+=-L./libstm32g0 -lstm32g0
 OBJCOPY=arm-none-eabi-objcopy
 
 SRC = $(wildcard src/*.c)
@@ -13,11 +17,15 @@ all: main.bin
 main.bin: main.elf
 	$(OBJCOPY) -O binary $< $@
 
-main.elf: $(SRC)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+main.elf: $(SRC) libstm32g0.a
+	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $@
+
+libstm32g0.a:
+	$(MAKE) -C $(basename $@) $@
 
 clean:
 	rm -f *.elf *.bin
+	$(MAKE) -C libstm32g0 clean
 
 flash: main.bin
 	STM32_Programmer_CLI -c port=SWD -w main.bin 0x8000000 -rst

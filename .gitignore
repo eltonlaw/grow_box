@@ -1,3 +1,5 @@
+**/*.a
+**/*.o
 **/*.bin
 **/*.elf
 **/compile_commands.json
