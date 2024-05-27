@@ -2,12 +2,13 @@
 
 CC=arm-none-eabi-gcc
 GDB=arm-none-eabi-gdb
-CFLAGS=-mcpu=cortex-m0plus -mthumb -g -O0
+CFLAGS=-mcpu=cortex-m0plus -mthumb -g3 -O0
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Device/ST/STM32G0xx/Include
 CFLAGS+=-I./STM32CubeG0/Drivers/CMSIS/Include
 CFLAGS+=-I./libstm32g0/include
 CFLAGS+=-I./src
-LDFLAGS=-Tlinker_script.ld -nostartfiles
+CFLAGS+=-DSTM32G070xx
+LDFLAGS=-Tlinker_script.ld -nostartfiles -nostdlib
 LDFLAGS+=-L./libstm32g0 -lstm32g0
 OBJCOPY=arm-none-eabi-objcopy
 
@@ -36,3 +37,6 @@ openocd:
 
 gdb: main.elf
 	$(GDB) $<
+
+gdb-tui: main.elf
+	$(GDB) --tui $<

@@ -1,4 +1,3 @@
-#define STM32G070xx
 #include "stm32g0xx.h"
 #include "gpio.h"
 
