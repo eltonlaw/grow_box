@@ -10,6 +10,7 @@ CFLAGS+=-I./src
 CFLAGS+=-DSTM32G070xx
 LDFLAGS=-Tlinker_script.ld -nostartfiles -nostdlib
 LDFLAGS+=-L./libstm32g0 -lstm32g0
+LDFLAGS+=-Wl,-Map main.map
 OBJCOPY=arm-none-eabi-objcopy
 
 SRC = $(wildcard src/*.c)

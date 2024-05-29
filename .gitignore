@@ -3,3 +3,4 @@
 **/*.bin
 **/*.elf
 **/compile_commands.json
+**/*.map
