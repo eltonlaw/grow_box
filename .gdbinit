@@ -1,6 +1,5 @@
-# Connect to the remote target
-target extended-remote :3333
-# Load the application
+target remote :3333
 load
-# Set a breakpoint on our entry to main
-break main
+disassemble
+monitor halt
+monitor reset init

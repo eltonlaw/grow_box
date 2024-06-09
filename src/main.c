@@ -1,6 +1,9 @@
 #include "stm32g0xx.h"
 #include "gpio.h"
 
+/* __libc_init_array is part of the C standard lib init process and calls _init */
+void _init(void) { }
+
 volatile uint32_t uw_tick = 0;
 
 void SysTick_Handler(void) {

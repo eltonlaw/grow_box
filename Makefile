@@ -9,19 +9,28 @@ CFLAGS+=-I./libstm32g0/include
 CFLAGS+=-I./src
 CFLAGS+=-DSTM32G070xx
 LDFLAGS=-Tlinker_script.ld -nostartfiles -nostdlib
-LDFLAGS+=-L./libstm32g0 -lstm32g0
+LDFLAGS+=-L./libstm32g0 -lstm32g0 -lc -lm -lgcc
 LDFLAGS+=-Wl,-Map main.map
 OBJCOPY=arm-none-eabi-objcopy
 
 SRC = $(wildcard src/*.c)
+ASM = $(wildcard src/*.s)
+
+OBJ = $(SRC:.c=.o) $(ASM:.s=.o)
 
 all: main.bin
 
 main.bin: main.elf
 	$(OBJCOPY) -O binary $< $@
 
-main.elf: $(SRC) libstm32g0.a
-	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $@
+main.elf: $(OBJ) libstm32g0.a
+	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: %.s
+	$(CC) $(CFLAGS) -c $< -o $@
 
 libstm32g0.a:
 	$(MAKE) -C $(basename $@) $@
