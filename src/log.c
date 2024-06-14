@@ -1,6 +1,6 @@
 #include "log.h"
 
-log_config_t glog_config;
+log_config_t log_cfg;
 
 log_config_t log_config_default() {
     log_config_t cfg = {
@@ -11,11 +11,13 @@ log_config_t log_config_default() {
 }
 
 void log_open(log_config_t c) {
-    glog_config = c;
+    log_cfg = c;
 }
 
 void log_close() {
-    glog_config.subsystems_enabled = { false, false, false, false, false };
+	for (int i = 0; i < LOG_NUM_SUBSYSTEMS; i++) {
+		log_cfg.subsystems_enabled[i] = false;
+	}
 }
 
 const char *log_level_str[] = {
@@ -29,7 +31,7 @@ const char *log_level_str[] = {
 void log_backend(const char *fmt, ...) { };
 
 void log_msg(enum log_subsystem ls, enum log_level level, const char *msg) {
-    if (glog_config.level <= level && glog_config.subsystems_enabled[ls]) {
+    if (log_cfg.level <= level && log_cfg.subsystems_enabled[ls]) {
         log_backend("%s: %s\n", log_level_str[level], msg);
     }
 }
