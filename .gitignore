@@ -4,3 +4,4 @@
 **/*.elf
 **/compile_commands.json
 **/*.map
+**/*.kicad_sch.lck
