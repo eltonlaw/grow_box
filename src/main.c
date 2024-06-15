@@ -22,6 +22,7 @@ int main(void) {
     gpio_config_t gpio_cfg = {};
     gpio_open(&gpio_cfg);
     while (1) {
+        GPIOA->ODR ^= GPIO_ODR_OD5;
         delay(1000);
     }
 }
