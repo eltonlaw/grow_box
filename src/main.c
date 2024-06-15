@@ -16,13 +16,14 @@ void delay(uint32_t delay) {
 }
 
 int main(void) {
-	int x = add(1, 2);
     /* 16Mhz internal clock, 1ms per systick tick */
     SysTick_Config(16000);
     gpio_config_t gpio_cfg = {};
     gpio_open(&gpio_cfg);
     while (1) {
-        GPIOA->ODR ^= GPIO_ODR_OD5;
+        GPIOA->BSRR = GPIO_BSRR_BS5;
+        delay(1000);
+        GPIOA->BSRR = GPIO_BSRR_BR5;
         delay(1000);
     }
 }
