@@ -18,6 +18,8 @@ void delay(uint32_t delay) {
 int main(void) {
     /* 16Mhz internal clock, 1ms per systick tick */
     SysTick_Config(16000);
+    SystemCoreClockUpdate();
+
     gpio_config_t gpio_cfg = {};
     gpio_open(&gpio_cfg);
     while (1) {
