@@ -5,3 +5,5 @@
 **/compile_commands.json
 **/*.map
 **/*.kicad_sch.lck
+pcb/pcb-backups
+pcb/pcb.kicad_prl
