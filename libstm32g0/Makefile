@@ -14,8 +14,8 @@ OBJS = $(SRC:.c=.o)
 
 all: stm32g070rbt.a
 
-$(OBJS): $(SRC)
-	$(CC) $(CFLAGS) -c $^ -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB): $(OBJS)
 	$(AR) cr $@ $(OBJS)
