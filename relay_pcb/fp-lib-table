@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "vendor_eda")(type "KiCad")(uri "/home/d0nkrs/dev/grow_box/vendor_eda_models/vendor_eda.pretty")(options "")(descr ""))
+)
