@@ -10,3 +10,4 @@
 */*.kicad_prl
 **/gerbers
 **/*.net
+**/#auto_saved_files#
