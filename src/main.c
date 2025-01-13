@@ -1,17 +1,18 @@
 #include "stm32g0xx.h"
+#include "stm32g0xx_hal.h"
 
 /* __libc_init_array is part of the C standard lib init process and calls _init */
 void _init(void) { }
 
-volatile uint32_t uw_tick = 0;
+volatile uint32_t ms_tick = 0;
 
 void SysTick_Handler(void) {
-    uw_tick++;
+    ms_tick++;
 }
 
 void delay(uint32_t delay) {
-    uint32_t tickstart = uw_tick;
-    while ((uw_tick - tickstart) < delay);
+    uint32_t tickstart = ms_tick;
+    while ((ms_tick - tickstart) < delay);
 }
 
 /* Setup PA5 as output fro status pin */
@@ -33,6 +34,7 @@ void gpio_init() {
 }
 
 int main(void) {
+    HAL_Init();
     /* 16Mhz internal clock, 1ms per systick tick */
     // OS_Tick_Enable();
     SysTick_Config(16000);
