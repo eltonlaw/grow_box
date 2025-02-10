@@ -11,3 +11,4 @@
 **/gerbers
 **/*.net
 **/#auto_saved_files#
+build/
